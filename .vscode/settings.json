@@ -8,6 +8,11 @@
 		"iostream": "cpp",
 		"dense": "cpp",
 		"chrono": "cpp",
-		"iosfwd": "cpp"
+		"iosfwd": "cpp",
+		"array": "cpp",
+		"hash_map": "cpp",
+		"initializer_list": "cpp",
+		"utility": "cpp",
+		"valarray": "cpp"
 	}
 }

@@ -72,7 +72,7 @@ namespace tjulib{
             if(motorPower > lastPower && lastPower < 10 && motorPower > 10) lastPower = 10;
             
             //This slews the motor by limiting the rate of change of the motor speed
-            double increment = motorPower - lastPower;
+            float increment = motorPower - lastPower;
             lastPower = motorPower;
             
         
@@ -82,5 +82,19 @@ namespace tjulib{
         return 0;
     }
 
+
+
+    // class PIDMotorGroup: public motor_group{
+    //     public:
+    //         spinPID( directionType dir, float velocity){
+                
+    //             for(int i=0;i<size();i++){
+    //                 ((PIDMotor*)at(i))->spinPID(dir, velocity);
+    //             }
+    //         }
+    // };
+
 };
+
+
 
