@@ -18,8 +18,6 @@ float velPID::calculate(float wantedRPM, float currentRPM) {
   m_integral += m_Error;
   m_derivative = (m_Error - m_lastError);
   m_lastError = m_Error;
-//   if(m_derivative < 0) m_derivative;
-  m_derivative = m_derivative;
 
   float finalPower = (m_Error * m_Kp) + (m_derivative * m_Kd) + (m_integral * m_Ki);
 

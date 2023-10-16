@@ -7,11 +7,6 @@
 using namespace vex;
 
 
-
-
-
-
-
 int test(){
     return 0;
 }
@@ -19,6 +14,15 @@ int test(){
 
 
 namespace tjulib{
+    struct args{
+        motor *pmotor;
+        velPID* pMPID;
+        float* ptargetRPM;
+
+        args(motor *pmotor, velPID* pMPID, float* ptargetRPM):pmotor(pmotor), pMPID(pMPID), ptargetRPM(ptargetRPM){};
+    };
+    int processVelPID(void * nargs);
+
     class PIDMotor: public motor{
 
     protected :
@@ -33,14 +37,18 @@ namespace tjulib{
             spinPIDMotor.suspend();
         }
 
-        void setPID( double Kp, double Ki, double Kd){
+        void setPID( float Kp, float Ki, float Kd){
             MPID.setGains(Kp, Ki, Kd);
         }
 
         //暂时只有pct的
-        void spinPID( directionType dir, double velocity){
+        void spinPID( directionType dir, float velocity){
             //改参数
             targetRPM = velocity * (dir==directionType::fwd?1:-1);
+            if(abs(velocity)<1e-6)
+                spinPIDMotor.suspend();
+            else
+                spinPIDMotor.resume();
         }
     };
 
@@ -48,13 +56,7 @@ namespace tjulib{
     
 
     //传地址，连带修改
-    struct args{
-        PIDMotor *pmotor;
-        velPID* pMPID;
-        float* ptargetRPM;
-
-        args(PIDMotor *pmotor, velPID* pMPID, float* ptargetRPM):pmotor(pmotor), pMPID(pMPID), ptargetRPM(ptargetRPM){};
-    };
+    
     
     float currentRPM, motorPower, lastPower;
 
@@ -74,7 +76,7 @@ namespace tjulib{
             lastPower = motorPower;
             
         
-            vexMotorVoltageSet(index(),motorPower* Math::velocityToVoltage);//controled by voltage
+            vexMotorVoltageSet(arg->pmotor->index(),motorPower* Math::velocityToVoltage);//controled by voltage
             wait(10, msec);
         }
         return 0;
