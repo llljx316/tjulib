@@ -35,6 +35,9 @@ namespace tjulib{
       bool pointCircle(graphPoint point, graphPoint circleCenter, float cr);
       bool lineCircle(graphPoint linePoint1, graphPoint linePoint2, graphPoint circleCenter, float r);
 
+      static constexpr float velocityToVoltage = 12000/200;
+
+
       // PURE PURSUIT
       std::vector<graphPoint> lineCircleIntersection(graphPoint circleCenter, float radius,
                                                             graphPoint linePoint1, graphPoint linePoint2);
