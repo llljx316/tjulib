@@ -13,6 +13,13 @@
 		"hash_map": "cpp",
 		"initializer_list": "cpp",
 		"utility": "cpp",
-		"valarray": "cpp"
+		"valarray": "cpp",
+		"algorithm": "cpp",
+		"*.tcc": "cpp",
+		"fstream": "cpp",
+		"type_traits": "cpp",
+		"threadpool": "cpp",
+		"mprealsupport": "cpp",
+		"nonlinearoptimization": "cpp"
 	}
 }

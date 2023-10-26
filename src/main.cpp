@@ -14,6 +14,9 @@ using namespace vex;
 
 // A global instance of vex::brain used for printing to the V5 brain screen
 vex::brain       Brain;
+tjulib::PIDMotor test(PORT1, 1, 1, 1);
+tjulib::motor test1(PORT2);
+vex::controller c1;
 
 // define your global instances of motors and other devices here
 
@@ -21,10 +24,19 @@ vex::brain       Brain;
 int main() {
 
     Brain.Screen.printAt( 10, 50, "Hello V5" );
-   
-    while(1) {
+    
+    while(1){
+        test.spinPID(directionType::fwd, 100);
+        if(c1.ButtonA.pressing()){
+            test.spinPID(directionType::fwd, 100);
+            printf("hello!");
+        }
+        else{
+            test.spinPID(directionType::fwd, 0);
+        }
+        //printf("%lf", test.velocity(pct));
         
-        // Allow other tasks to run
-        this_thread::sleep_for(10);
+        Brain.Screen.printAt( 10, 50, "%lf", test.velocity(pct) );
+        vex::task::sleep(100);
     }
 }
