@@ -16,7 +16,7 @@ using namespace vex;
 vex::brain       Brain;
 tjulib::PIDMotor test(PORT1, 1, 1, 1);
 tjulib::motor test1(PORT2);
-vex::controller c1;
+vex::controller c1 = controller(primary);
 
 // define your global instances of motors and other devices here
 
@@ -24,7 +24,7 @@ vex::controller c1;
 int main() {
 
     Brain.Screen.printAt( 10, 50, "Hello V5" );
-    
+
     while(1){
         test.spinPID(directionType::fwd, 100);
         if(c1.ButtonA.pressing()){
@@ -38,5 +38,6 @@ int main() {
         
         Brain.Screen.printAt( 10, 50, "%lf", test.velocity(pct) );
         vex::task::sleep(100);
+
     }
 }

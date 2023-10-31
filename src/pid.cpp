@@ -1,8 +1,9 @@
 #include"tjulib/pid.hpp"
+#include <cmath>
 using namespace vex;
 
 namespace tjulib{
-    PIDMotor::PIDMotor(int index, float Kp, float Ki, float Kd):motor(index), arg(this,&this->MPID,&targetRPM), MPID(Kp, Ki, Kd), spinPIDMotor(&processVelPID, &arg){
+    PIDMotor::PIDMotor(int index, float Kp, float Ki, float Kd):motor(index), arg(this,&this->MPID,&targetRPM), spinPIDMotor(&processVelPID, &arg), MPID(Kp, Ki, Kd){
         spinPIDMotor.suspend();
     }
 
@@ -14,7 +15,7 @@ namespace tjulib{
     void PIDMotor::spinPID( directionType dir, float velocity){
         //改参数
         targetRPM = velocity * (dir==directionType::fwd?1:-1);
-        if(abs(velocity)<1e-6)
+        if(std::abs(velocity)<1e-6)
             spinPIDMotor.suspend();
         else
             spinPIDMotor.resume();
@@ -42,8 +43,6 @@ namespace tjulib{
             //Give the motor a bit of a starting boost
             if(motorPower > lastPower && lastPower < 10 && motorPower > 10) lastPower = 10;
             
-            //This slews the motor by limiting the rate of change of the motor speed
-            float increment = motorPower - lastPower;
             lastPower = motorPower;
             
         

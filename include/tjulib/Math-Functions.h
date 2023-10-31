@@ -19,21 +19,21 @@ namespace tjulib{
       float inchToDeg(float inch);
 
       // CONVERSIONS (ANGLE)
-      float getRadians(float deg);
-      float getDeg(float rad);
+      static float getRadians(float deg);
+      static float getDeg(float rad);
 
       // HELPER FUNCTIONS
-      float getHeading(float angle);
-      float angleWrap(float angle);
-      float compressAngle(float startAngle, float angle);
-      float clip(float number, float min, float max);
-      int optimalTurnSide(float currentA, float targetA);
+      static float getHeading(float angle);
+      static float angleWrap(float angle);
+      static float compressAngle(float startAngle, float angle);
+      static float clip(float number, float min, float max);
+      static int optimalTurnSide(float currentA, float targetA);
 
       // GEOMETRY FUNCTIONS
-      float dist(graphPoint point1, graphPoint point2);
-      bool linePoint(graphPoint linePoint1, graphPoint linePoint2, graphPoint point);
-      bool pointCircle(graphPoint point, graphPoint circleCenter, float cr);
-      bool lineCircle(graphPoint linePoint1, graphPoint linePoint2, graphPoint circleCenter, float r);
+      static float dist(graphPoint point1, graphPoint point2);
+      static bool linePoint(graphPoint linePoint1, graphPoint linePoint2, graphPoint point);
+      static bool pointCircle(graphPoint point, graphPoint circleCenter, float cr);
+      static bool lineCircle(graphPoint linePoint1, graphPoint linePoint2, graphPoint circleCenter, float r);
 
       static constexpr float velocityToVoltage = 12000/200;
 
